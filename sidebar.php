@@ -3,18 +3,16 @@
 
 
  <div id="back-to-top" style="display:none;">
-	<!--<a href="#" id="">-->
 	    <i class="fa fa-2x fa-angle-up" aria-hidden="true" style="color:#fff"/></i>
-	<!--</a>-->
 </div>
 <script>
 document.addEventListener("DOMContentLoaded", function() {
     const backToTopButton = document.getElementById("back-to-top");
 
     // 监听页面滚动事件，显示/隐藏返回顶部按钮
-    window.addEventListener("scroll", function() {
+    window.addEventListener("scroll", function(event) {
         if (window.scrollY >= 300) {
-            backToTopButton.style.display = "inline-block"; // 超过设定距离显示按钮
+            backToTopButton.style.display = "block"; // 超过设定距离显示按钮
         } else {
             backToTopButton.style.display = "none"; // 距离不足隐藏按钮
         }
@@ -28,27 +26,19 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // 平滑滚动到页面顶部的函数...
     function scrollToTop(duration) {
-        const scrollHeight = window.scrollY;
-        const scrollStep = Math.PI / (duration / 15);
-        const cosParameter = scrollHeight / 2;
+        const start = window.scrollY;
+        const startTime = performance.now();
 
-        let scrollCount = 0;
-        let scrollMargin;
-
-        requestAnimationFrame(step);
-
-        function step() {
-            setTimeout(function() {
-                if (window.scrollY != 0) {
-                    scrollCount += 1;
-                    scrollMargin = cosParameter - cosParameter * Math.cos(scrollCount * scrollStep);
-                    window.scrollTo(0, (scrollHeight - scrollMargin));
-                    requestAnimationFrame(step);
-                } else {
-                    cancelAnimationFrame(step);
-                }
-            }, 15);
+        function scrollStep(time) {
+            let distance = Math.min(1, (time - startTime) / duration);
+            window.scrollTo(0, start - (start * distance));
+            if (distance < 1) {
+                requestAnimationFrame(scrollStep);
+            }
         }
+
+        requestAnimationFrame(scrollStep);
     }
 });
+
 </script>

@@ -139,6 +139,10 @@
 	display: inline-block;
 	padding: 0 5px 0 5px;
 }
+.right_article_fenlei{
+    padding: 10px 0;
+    text-align: center;
+}
 /* 文章内容 */
 .page_right_content{
 	padding: 40px 40px 100px;
@@ -169,6 +173,9 @@
 .blog_header_content img{
     max-width: 100%;
     height: auto;
+}
+.page_refuse{
+    text-align: center;
 }
 /*评论*/
 .comment-list li{
@@ -250,6 +257,7 @@
 	display: inline-flex;
 	flex-wrap: wrap;
 	justify-content: center;
+	padding-bottom: 10px;
 }
 .typecho_friends ul li img{
 	border-radius: 50%;
